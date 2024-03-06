@@ -3,26 +3,28 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Movie Player</title>
+  <title>Movie Streaming Website</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <div class="movie-gallery">
-    <img src="movie1.jpg" alt="Movie 1" class="movie" data-video="1.mp4">
-    <img src="movie2.jpg" alt="Movie 2" class="movie" data-video="movie2.mp4">
-    <!-- Add more movie images with corresponding video URLs -->
-  </div>
-  
-  <video id="video-player" controls>
-    <source src="" type="video/mp4">
-    Your browser does not support the video tag.
-  </video>
+  <header>
+    <h1>Welcome to Our Movie Streaming Website</h1>
+  </header>
 
-  <div class="controls">
-    <button id="play-pause">Play/Pause</button>
-    <button id="previous">Previous</button>
-    <button id="forward">Forward</button>
+  <nav>
+    <ul>
+      <li><a href="#" class="category">Action</a></li>
+      <li><a href="#" class="category">Comedy</a></li>
+      <li><a href="#" class="category">Drama</a></li>
+      <!-- Add more categories -->
+    </ul>
+  </nav>
+
+  <div id="movie-container" class="movie-container">
+    <!-- Movie cards will be dynamically added here -->
   </div>
+
+  <audio id="audio-player" controls style="display: none;"></audio>
 
   <script src="scripts.js"></script>
 </body>
