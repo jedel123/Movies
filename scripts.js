@@ -1,38 +1,57 @@
 document.addEventListener("DOMContentLoaded", function() {
-  const videoPlayer = document.getElementById('video-player');
-  const playPauseButton = document.getElementById('play-pause');
-  const previousButton = document.getElementById('previous');
-  const forwardButton = document.getElementById('forward');
-  const movieGallery = document.querySelectorAll('.movie');
+  const movieContainer = document.getElementById('movie-container');
+  const audioPlayer = document.getElementById('audio-player');
 
-  // Event listener for movie click
-  movieGallery.forEach(movie => {
-    movie.addEventListener('click', function() {
-      const videoSource = this.getAttribute('data-video');
-      videoPlayer.src = videoSource;
-      videoPlayer.play();
+  // Sample movies data
+  const movies = [
+    { title: 'Movie 1', category: 'Action', src: 'movie1.mp4', audio: 'audio1.mp3' },
+    { title: 'Movie 2', category: 'Comedy', src: 'movie2.mp4', audio: 'audio2.mp3' },
+    { title: 'Movie 3', category: 'Drama', src: 'movie3.mp4', audio: 'audio3.mp3' }
+    // Add more movie objects as needed
+  ];
+
+  // Display movies in the specified category
+  function displayMovies(category) {
+    movieContainer.innerHTML = ''; // Clear previous movies
+
+    movies.forEach(movie => {
+      if (movie.category === category) {
+        const movieCard = document.createElement('div');
+        movieCard.classList.add('movie-card');
+
+        const video = document.createElement('video');
+        video.src = movie.src;
+        video.controls = true;
+        video.preload = 'metadata';
+
+        const audio = document.createElement('audio');
+        audio.src = movie.audio;
+        audio.controls = true;
+        audio.preload = 'metadata';
+        audio.style.display = 'none'; // Hide audio player
+
+        const title = document.createElement('h3');
+        title.classList.add('movie-title');
+        title.textContent = movie.title;
+
+        movieCard.appendChild(video);
+        movieCard.appendChild(audio);
+        movieCard.appendChild(title);
+
+        movieContainer.appendChild(movieCard);
+      }
     });
-  });
+  }
 
-  // Event listeners for control buttons
-  playPauseButton.addEventListener('click', function() {
-    if (videoPlayer.paused) {
-      videoPlayer.play();
-    } else {
-      videoPlayer.pause();
-    }
-  });
+  // Initial display - show movies in 'Action' category
+  displayMovies('Action');
 
-  previousButton.addEventListener('click', function() {
-    // Code to go to the previous video, if applicable
-    // This could involve maintaining a list of video sources
-    // and tracking the current video index
-    console.log('Previous button clicked');
-  });
-
-  forwardButton.addEventListener('click', function() {
-    // Code to go to the next video, if applicable
-    // Similar to previousButton event listener
-    console.log('Forward button clicked');
+  // Event listener for category links
+  document.querySelectorAll('.category').forEach(category => {
+    category.addEventListener('click', function(event) {
+      event.preventDefault();
+      const selectedCategory = this.textContent;
+      displayMovies(selectedCategory);
+    });
   });
 });
